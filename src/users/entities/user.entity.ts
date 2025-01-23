@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToOne,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 import { Role } from '../../common/enums/role.enum';
 import { OwnerProfile } from '../../owner-profiles/entities/owner-profile.entity';
 import { VetProfile } from '../../vet-profiles/entities/vet-profile.entity';
@@ -19,6 +20,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column({

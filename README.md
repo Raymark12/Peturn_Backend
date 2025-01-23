@@ -47,6 +47,25 @@ API available at `http://localhost:3000/api`
 | POST   | `/api/auth/login`    | Login             | No   |
 | GET    | `/api/auth/me`       | Get current user  | Yes  |
 
+### Owner Profiles
+
+| Method | Endpoint                 | Description    | Auth |
+| ------ | ------------------------ | -------------- | ---- |
+| GET    | `/api/owner-profiles/me` | Get my profile | Yes  |
+| POST   | `/api/owner-profiles/me` | Create profile | Yes  |
+| PATCH  | `/api/owner-profiles/me` | Update profile | Yes  |
+
+### Vet Profiles
+
+| Method | Endpoint               | Description    | Auth |
+| ------ | ---------------------- | -------------- | ---- |
+| GET    | `/api/vet-profiles`    | List all vets  | No   |
+| GET    | `/api/vet-profiles/me` | Get my profile | Yes  |
+| POST   | `/api/vet-profiles/me` | Create profile | Yes  |
+| PATCH  | `/api/vet-profiles/me` | Update profile | Yes  |
+
+---
+
 **Register/Login Request:**
 
 ```json
@@ -57,11 +76,24 @@ API available at `http://localhost:3000/api`
 }
 ```
 
-**Response:**
+**Auth Response:**
 
 ```json
 {
   "access_token": "eyJhbG..."
+}
+```
+
+**Create Profile Request:**
+
+```json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "phone": "+1234567890" // optional
+  // For vets, also include:
+  // "licenseNumber": "VET12345",
+  // "specialization": "Surgery"
 }
 ```
 

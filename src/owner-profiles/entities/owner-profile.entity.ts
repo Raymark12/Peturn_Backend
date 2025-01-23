@@ -23,9 +23,6 @@ export class OwnerProfile {
   @Column({ nullable: true })
   phone: string;
 
-  @Column({ nullable: true })
-  address: string;
-
   @OneToOne(() => User, (user) => user.ownerProfile, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
   user: User;
