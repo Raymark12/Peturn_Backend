@@ -3,11 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
+  OneToMany,
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { Pet } from '../../pets/entities/pet.entity';
 
 @Entity('owner_profiles')
 export class OwnerProfile {
@@ -29,6 +31,9 @@ export class OwnerProfile {
 
   @Column()
   userId: string;
+
+  @OneToMany(() => Pet, (pet) => pet.owner)
+  pets: Pet[];
 
   @CreateDateColumn()
   createdAt: Date;

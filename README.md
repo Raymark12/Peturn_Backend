@@ -64,6 +64,16 @@ API available at `http://localhost:3000/api`
 | POST   | `/api/vet-profiles/me` | Create profile | Yes  |
 | PATCH  | `/api/vet-profiles/me` | Update profile | Yes  |
 
+### Pets (Owners only)
+
+| Method | Endpoint        | Description    | Auth |
+| ------ | --------------- | -------------- | ---- |
+| GET    | `/api/pets`     | List my pets   | Yes  |
+| POST   | `/api/pets`     | Add new pet    | Yes  |
+| GET    | `/api/pets/:id` | Get pet detail | Yes  |
+| PATCH  | `/api/pets/:id` | Update pet     | Yes  |
+| DELETE | `/api/pets/:id` | Remove pet     | Yes  |
+
 ---
 
 **Register/Login Request:**
@@ -94,6 +104,19 @@ API available at `http://localhost:3000/api`
   // For vets, also include:
   // "licenseNumber": "VET12345",
   // "specialization": "Surgery"
+}
+```
+
+**Create Pet Request:**
+
+```json
+{
+  "name": "Buddy",
+  "species": "dog", // dog, cat, bird, rabbit, other
+  "breed": "Golden Retriever", // optional
+  "birthDate": "2020-05-15", // optional
+  "weight": 25.5, // optional, in kg
+  "notes": "Allergic to chicken" // optional
 }
 ```
 

@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { OwnerProfilesModule } from './owner-profiles/owner-profiles.module';
 import { VetProfilesModule } from './vet-profiles/vet-profiles.module';
+import { PetsModule } from './pets/pets.module';
 
 @Module({
   imports: [
@@ -37,9 +38,10 @@ import { VetProfilesModule } from './vet-profiles/vet-profiles.module';
     AuthModule,
     OwnerProfilesModule,
     VetProfilesModule,
+    PetsModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
 
