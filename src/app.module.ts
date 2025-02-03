@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { OwnerProfilesModule } from './owner-profiles/owner-profiles.module';
 import { VetProfilesModule } from './vet-profiles/vet-profiles.module';
 import { PetsModule } from './pets/pets.module';
+import { SchedulesModule } from './schedules/schedules.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { PetsModule } from './pets/pets.module';
     OwnerProfilesModule,
     VetProfilesModule,
     PetsModule,
+    SchedulesModule,
   ],
   controllers: [],
   providers: [],

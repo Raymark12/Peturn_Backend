@@ -3,11 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
+  OneToMany,
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { VetSchedule } from '../../schedules/entities/vet-schedule.entity';
 
 @Entity('vet_profiles')
 export class VetProfile {
@@ -35,6 +37,9 @@ export class VetProfile {
 
   @Column()
   userId: string;
+
+  @OneToMany(() => VetSchedule, (schedule) => schedule.vet)
+  schedules: VetSchedule[];
 
   @CreateDateColumn()
   createdAt: Date;

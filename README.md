@@ -74,6 +74,22 @@ API available at `http://localhost:3000/api`
 | PATCH  | `/api/pets/:id` | Update pet     | Yes  |
 | DELETE | `/api/pets/:id` | Remove pet     | Yes  |
 
+### Schedules (Vets)
+
+| Method | Endpoint             | Description            | Auth |
+| ------ | -------------------- | ---------------------- | ---- |
+| POST   | `/api/schedules`     | Set schedule for a day | Vet  |
+| GET    | `/api/schedules/me`  | Get my weekly schedule | Vet  |
+| PATCH  | `/api/schedules/:id` | Update day's schedule  | Vet  |
+| DELETE | `/api/schedules/:id` | Remove from schedule   | Vet  |
+
+### Schedules (Public)
+
+| Method | Endpoint                          | Description         | Auth |
+| ------ | --------------------------------- | ------------------- | ---- |
+| GET    | `/api/schedules/vet/:vetId`       | Get vet's schedule  | No   |
+| GET    | `/api/schedules/vet/:vetId/slots` | Get available slots | No   |
+
 ---
 
 **Register/Login Request:**
@@ -117,6 +133,35 @@ API available at `http://localhost:3000/api`
   "birthDate": "2020-05-15", // optional
   "weight": 25.5, // optional, in kg
   "notes": "Allergic to chicken" // optional
+}
+```
+
+**Create Schedule Request (Vet):**
+
+```json
+{
+  "dayOfWeek": 1, // 0=Sunday, 1=Monday, ..., 6=Saturday
+  "startTime": "09:00",
+  "endTime": "17:00",
+  "slotDuration": 30 // optional, default 30 minutes
+}
+```
+
+**Get Available Slots:**
+
+```
+GET /api/schedules/vet/:vetId/slots?date=2025-01-27
+```
+
+Response:
+
+```json
+{
+  "date": "2025-01-27",
+  "slots": [
+    { "startTime": "09:00", "endTime": "09:30", "available": true },
+    { "startTime": "09:30", "endTime": "10:00", "available": true }
+  ]
 }
 ```
 
