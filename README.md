@@ -90,6 +90,24 @@ API available at `http://localhost:3000/api`
 | GET    | `/api/schedules/vet/:vetId`       | Get vet's schedule  | No   |
 | GET    | `/api/schedules/vet/:vetId/slots` | Get available slots | No   |
 
+### Appointments (Owners)
+
+| Method | Endpoint                | Description            | Auth  |
+| ------ | ----------------------- | ---------------------- | ----- |
+| POST   | `/api/appointments`     | Book new appointment   | Owner |
+| GET    | `/api/appointments`     | List my appointments   | Owner |
+| GET    | `/api/appointments/:id` | Get appointment detail | Owner |
+| PATCH  | `/api/appointments/:id` | Update appointment     | Owner |
+| DELETE | `/api/appointments/:id` | Cancel appointment     | Owner |
+
+### Appointments (Vets)
+
+| Method | Endpoint                       | Description          | Auth |
+| ------ | ------------------------------ | -------------------- | ---- |
+| GET    | `/api/appointments`            | List my appointments | Vet  |
+| GET    | `/api/appointments/:id`        | Get appointment      | Vet  |
+| PATCH  | `/api/appointments/:id/status` | Update status        | Vet  |
+
 ---
 
 **Register/Login Request:**
@@ -162,6 +180,46 @@ Response:
     { "startTime": "09:00", "endTime": "09:30", "available": true },
     { "startTime": "09:30", "endTime": "10:00", "available": true }
   ]
+}
+```
+
+**Create Appointment Request (Owner):**
+
+First-time user (creates profile and pet inline):
+
+```json
+{
+  "ownerFirstName": "John",
+  "ownerLastName": "Doe",
+  "ownerPhone": "+1234567890",
+  "petName": "Buddy",
+  "petSpecies": "dog",
+  "petBreed": "Golden Retriever",
+  "vetId": "uuid-of-vet",
+  "date": "2025-01-27",
+  "startTime": "09:00",
+  "reason": "Annual checkup"
+}
+```
+
+Returning user (existing pet):
+
+```json
+{
+  "petId": "uuid-of-existing-pet",
+  "vetId": "uuid-of-vet",
+  "date": "2025-01-27",
+  "startTime": "09:00",
+  "reason": "Follow-up",
+  "notes": "Please check ears"
+}
+```
+
+**Update Status Request (Vet):**
+
+```json
+{
+  "status": "confirmed" // pending, confirmed, cancelled, completed
 }
 ```
 

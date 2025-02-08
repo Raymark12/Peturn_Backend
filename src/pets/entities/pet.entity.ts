@@ -3,12 +3,14 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  OneToMany,
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { OwnerProfile } from '../../owner-profiles/entities/owner-profile.entity';
 import { Species } from '../../common/enums/species.enum';
+import { Appointment } from '../../appointments/entities/appointment.entity';
 
 @Entity('pets')
 export class Pet {
@@ -43,6 +45,9 @@ export class Pet {
 
   @Column()
   ownerId: string;
+
+  @OneToMany(() => Appointment, (appointment) => appointment.pet)
+  appointments: Appointment[];
 
   @CreateDateColumn()
   createdAt: Date;

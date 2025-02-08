@@ -14,9 +14,31 @@ export class OwnerProfilesService {
     return this.ownerProfileRepository.findOne({ where: { userId } });
   }
 
+  async findById(id: string): Promise<OwnerProfile | null> {
+    return this.ownerProfileRepository.findOne({ where: { id } });
+  }
+
   async create(profileData: Partial<OwnerProfile>): Promise<OwnerProfile> {
     const profile = this.ownerProfileRepository.create(profileData);
     return this.ownerProfileRepository.save(profile);
+  }
+
+  async findOrCreate(
+    userId: string,
+    profileData?: { firstName?: string; lastName?: string; phone?: string },
+  ): Promise<OwnerProfile> {
+    let profile = await this.findByUserId(userId);
+
+    if (!profile) {
+      profile = await this.create({
+        userId,
+        firstName: profileData?.firstName || 'Unknown',
+        lastName: profileData?.lastName || 'Owner',
+        phone: profileData?.phone,
+      });
+    }
+
+    return profile;
   }
 
   async update(

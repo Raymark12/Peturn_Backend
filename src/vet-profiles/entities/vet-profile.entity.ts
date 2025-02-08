@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { VetSchedule } from '../../schedules/entities/vet-schedule.entity';
+import { Appointment } from '../../appointments/entities/appointment.entity';
 
 @Entity('vet_profiles')
 export class VetProfile {
@@ -40,6 +41,9 @@ export class VetProfile {
 
   @OneToMany(() => VetSchedule, (schedule) => schedule.vet)
   schedules: VetSchedule[];
+
+  @OneToMany(() => Appointment, (appointment) => appointment.vet)
+  appointments: Appointment[];
 
   @CreateDateColumn()
   createdAt: Date;
