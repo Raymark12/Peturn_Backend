@@ -4,6 +4,7 @@ import {
   IsOptional,
   IsDateString,
   IsNumber,
+  IsNotEmpty,
   Min,
 } from 'class-validator';
 import { Transform } from 'class-transformer';
@@ -13,6 +14,7 @@ import { capitalize, trim } from '../../common/utils/string.utils';
 export class CreatePetDto {
   @Transform(({ value }) => capitalize(value))
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsEnum(Species)

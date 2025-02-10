@@ -1,4 +1,6 @@
 import { IsString, IsOptional, IsDateString, Matches } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { trim } from '../../common/utils/string.utils';
 
 export class UpdateAppointmentDto {
   @IsDateString()
@@ -12,12 +14,13 @@ export class UpdateAppointmentDto {
   @IsOptional()
   startTime?: string;
 
+  @Transform(({ value }) => trim(value))
   @IsString()
   @IsOptional()
   reason?: string;
 
+  @Transform(({ value }) => trim(value))
   @IsString()
   @IsOptional()
   notes?: string;
 }
-

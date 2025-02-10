@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsEnum,
   IsNumber,
+  IsNotEmpty,
   Matches,
   ValidateIf,
 } from 'class-validator';
@@ -37,6 +38,7 @@ export class CreateAppointmentDto {
 
   @Transform(({ value }) => capitalize(value))
   @IsString()
+  @IsNotEmpty()
   @ValidateIf((o) => !o.petId) // Required if no pet ID provided
   @IsOptional()
   petName?: string;
@@ -79,6 +81,7 @@ export class CreateAppointmentDto {
 
   @Transform(({ value }) => trim(value))
   @IsString()
+  @IsNotEmpty()
   reason: string;
 
   @Transform(({ value }) => trim(value))
