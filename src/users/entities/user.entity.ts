@@ -19,9 +19,12 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Exclude()
-  password: string;
+  password: string | null;
+
+  @Column({ unique: true, nullable: true })
+  googleId: string | null;
 
   @Column({
     type: 'enum',

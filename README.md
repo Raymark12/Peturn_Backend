@@ -27,15 +27,18 @@ API available at `http://localhost:3000/api`
 
 ### Environment Variables
 
-| Variable         | Description            | Default   |
-| ---------------- | ---------------------- | --------- |
-| `DB_HOST`        | Database host          | localhost |
-| `DB_PORT`        | Database port          | 5432      |
-| `DB_USERNAME`    | Database user          | postgres  |
-| `DB_PASSWORD`    | Database password      | -         |
-| `DB_DATABASE`    | Database name          | peturn    |
-| `JWT_SECRET`     | Secret for JWT signing | -         |
-| `JWT_EXPIRATION` | Token expiration       | 1d        |
+| Variable               | Description            | Default   |
+| ---------------------- | ---------------------- | --------- |
+| `DB_HOST`              | Database host          | localhost |
+| `DB_PORT`              | Database port          | 5432      |
+| `DB_USERNAME`          | Database user          | postgres  |
+| `DB_PASSWORD`          | Database password      | -         |
+| `DB_DATABASE`          | Database name          | peturn    |
+| `JWT_SECRET`           | Secret for JWT signing | -         |
+| `JWT_EXPIRATION`       | Token expiration       | 1d        |
+| `GOOGLE_CLIENT_ID`     | Google OAuth ID        | -         |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth Secret    | -         |
+| `GOOGLE_CALLBACK_URL`  | Google Callback URI    | -         |
 
 ## API Endpoints
 
@@ -45,6 +48,7 @@ API available at `http://localhost:3000/api`
 | ------ | -------------------- | ----------------- | ---- |
 | POST   | `/api/auth/register` | Register new user | No   |
 | POST   | `/api/auth/login`    | Login             | No   |
+| GET    | `/api/auth/google`   | Google Login      | No   |
 | GET    | `/api/auth/me`       | Get current user  | Yes  |
 
 ### Owner Profiles

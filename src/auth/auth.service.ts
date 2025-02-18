@@ -41,6 +41,10 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
+    if (!user.password) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
     const isPasswordValid = await bcrypt.compare(
       loginDto.password,
       user.password,
@@ -58,10 +62,40 @@ export class AuthService {
 
   async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.usersService.findByEmail(email);
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (user && user.password && (await bcrypt.compare(password, user.password))) {
       return user;
     }
     return null;
+  }
+
+  async googleLogin(req: any) {
+    if (!req.user) {
+      throw new UnauthorizedException('No user from google');
+    }
+
+    const { id, emails } = req.user;
+    const email = emails[0].value;
+
+    let user = await this.usersService.findOneByGoogleId(id);
+
+    if (!user) {
+      user = await this.usersService.findByEmail(email);
+
+      if (user) {
+        // Link googleId to existing account
+        user = await this.usersService.update(user.id, { googleId: id });
+        if (!user) throw new UnauthorizedException('Error linking google account');
+      } else {
+        user = await this.usersService.create({
+          email,
+          googleId: id,
+          role: Role.OWNER,
+          isActive: true,
+        });
+      }
+    }
+
+    return this.generateToken(user);
   }
 
   async generateToken(user: User) {
